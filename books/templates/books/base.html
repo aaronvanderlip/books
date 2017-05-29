@@ -1,0 +1,51 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<!--[if lt IE 9]> <html class="lt-ie9" lang="en"> <![endif]-->
+<!--[if !IE] -->
+<html>
+    {% include "books/inc/header.html" %}
+    <div role="main" id="main">
+        <div id="main-content-header">
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h1 class='title' style="font-family: Rock Salt; color: #FF8D56 !important;">
+                        Books
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="main-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-4 col-sm-offset-5" style="margin-bottom:30px">
+                        <h4><a href="/media/cara-mckenna-booklist.pdf">Printable Book List</a><h4>
+                    </div>
+                </div>
+                <div id="portfolio-filter" class="row">
+                    <div class="col-sm-12">
+                        <ul class="nav nav-pills">
+                            <li class="active"><a href="#" data-filter="*">All</a></li>
+                            <li class=""><a href="#" data-filter=".portfolio-filter-romance">Romance</a></li>
+                            <li class=""><a href="#" data-filter=".portfolio-filter-erotica">Erotic Romance</a></li>
+                            <li class=""><a href="#" data-filter=".portfolio-filter-literary">Literary Fiction</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="portfolio-container" class="row portfolio-boxes isotope" style="position: relative; overflow: hidden; height: 768px;">
+                    {%block content%}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+        <div id="scroll-to-top" class="fade" style="bottom: 64px;">
+            <i class="fa fa-chevron-up"></i>
+        </div>
+    </div>
+    {% include "books/inc/footer.html" %}
+    </div>
+        {% include "books/inc/js.html" %}
+    </body>
+</html>

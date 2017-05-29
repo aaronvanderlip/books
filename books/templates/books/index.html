@@ -1,0 +1,73 @@
+{% load flatblocks %}
+<!DOCTYPE html>
+<!--[if lt IE 9]> <html class="lt-ie9" lang="en"> <![endif]-->
+<!--[if !IE] -->
+<html lang='en'>
+    {% include "books/inc/header.html" %}
+    <div id='main' role='main'>
+        <!-- / carousel image -->
+        <div class='hero-carousel carousel-image carousel-image-pagination carousel-image-arrows flexslider' id='carousel-example-2'>
+            <ul class='slides'>
+                {% flatblock "home.slide.1"  using="books/flatblock.html" %}
+                {% flatblock "home.slide.2" using="books/flatblock.html" %}
+                {% flatblock "home.slide.3" using="books/flatblock.html" %}
+            </ul>
+        </div>
+        <div id='main-content'>
+            <div class='container'>
+                <div class='row'>
+                    <div class='col-sm-12'>
+                        <p class='lead lead-lg text-center'>Welcome to the digital headquarters of romance and erotica author Cara McKenna, aka Meg Maguire, aka C.M. McKenna.</p>
+                    </div>
+                </div>
+                <div class='row'>
+                    <div class='col-sm-12'>
+                        <div class='page-header page-header-with-icon'>
+                            <i class='fa fa-bolt'></i>
+                            <h2>News</h2>
+                        </div>
+                        {% flatblock "home.news" using="books/flatblock.html" %}
+                    </div>
+                </div>
+                <div class='row'>
+                    <div class='col-sm-12'>
+                        <div class='page-header page-header-with-icon'>
+                            <i class='fa fa-book'></i>
+                            <h2>
+                                New & Upcoming Releases
+                                <small>Never miss a new book—<a href="http://caramckenna.us8.list-manage.com/subscribe?u=e7f5cf982b1bfafbdf5c8de63&id=be20b3fd55" target="new">subscribe</a> to my occasional newsletter.</small>
+                            </h2>
+                        </div>
+                        {% flatblock "home.upcoming" using="books/flatblock.html" %}
+                    </div>
+                </div>
+                <div class='row'>
+                    <div class='col-sm-12'>
+                        <div class='page-header page-header-with-icon'>
+                            <i class='fa fa-quote-right'></i>
+                            <h2>Quotes</h2>
+                        </div>
+                        {% flatblock "home.quotes" using="books/flatblock.html" %}
+                        <div class='row'>
+                            <div class='col-sm-12'>
+                                <div class='page-header page-header-with-icon'>
+                                    <i class='fa fa-star'></i>
+                                    <h2>Backlist Spotlight</h2>
+                                </div>
+                                {% flatblock "home.backlist" using="books/flatblock.html" %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class='fade' id='scroll-to-top'>
+    </div>
+    </div>
+    {% include "books/inc/footer.html" %}
+    </div>
+    {% include "books/inc/js.html" %}
+    </body>
+</html>

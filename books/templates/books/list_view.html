@@ -1,0 +1,20 @@
+{% extends "books/base.html" %}
+{% block content %}
+    {% for book in object_list %}
+
+                <div class="col-sm-3 portfolio-box portfolio-filter-{{ book.genre|lower }} portfolio-item isotope-item" style="position: absolute; left: 0px; top: 0px; transform: translate(0px, 0px) scale(1); opacity: 1;">
+                      <a href="{% url 'book-detail' book.slug %}">
+                  <div class="image-link">
+                    <i class="fa fa-search"></i>
+                    {% if book.thumbnail_image %}
+                    <img width="263" height="171" src="{{ book.thumbnail_image.url  }}" alt="{{ book.title  }}" class="img-responsive img-rounded center-block">
+                    {% endif %}
+                  </div>
+                  <h3 class="title">
+                          {{ book.title }}</h3>
+        <p class="category">{{ book.get_genre_display }}</p>
+                </a>
+              </div>
+    {% endfor %}
+<!-- end row -->
+{% endblock %}

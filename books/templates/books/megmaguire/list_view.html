@@ -1,0 +1,84 @@
+{% extends "books/megmaguire/base.html" %}
+{% block content %}
+  <div class="row sec-nav">
+      <div class="cell width-15 position-0"><img alt="books" src="/images/books.jpg"></div>
+    </div>
+<div class="row" style="background:#FFF2E1">
+{% for book in object_list %}
+<!--Book begin -->
+
+<div class="book" style="float:left">
+
+  <div style="float:left; width:134px"><img src="/{{book.cover_image}}" />  
+        <div class="gr_custom_each_container_" style="padding-top:8px">
+          <a href="http://www.goodreads.com/book/isbn/{{book.isbn}}" style="border:none" target="_blank"><img alt="review" src="http://www.goodreads.com/images/atmb_add_book-70x25.png" /></a>
+                      </div>
+                            </div>
+
+
+
+<div style="margin-left:150px;"><p class="title"><a href="{{book.publisher_link}}" target="_blank" class="body-link">{{ book.title }}</a></p>
+<p>{{ book.pub_date }} {{book.publisher}}, ISBN: {{ book.isbn }}</p>
+<div class="blurb">
+{{ book.text|safe|linebreaks }}
+</div>
+
+
+
+{% if book.get_reviews %}
+<div style="font-weight:bold; font-size:110%; margin-top:15px;"> Praise </div>
+{% for review in book.get_reviews %}
+<p>
+{{ review.text|safe }}
+<a class="body-link" href="{{ review.url|safe }}">&mdash;{{ review.source|safe }}</a>
+</p>
+{% endfor %}
+{% endif %}
+
+
+
+<div  style="z-index:20; float:left; margin-top:15px; margin-bottom:-20px;" >
+<ul class="nav nav-pills">
+{% if book.get_ebook_vendors %}
+<li class="dropdown">
+<a href="" class="dropdown-toggle" data-toggle="dropdown">buy as e-book from...</a>
+<ul id="menu1" class="dropdown-menu">
+{% for vendor in book.get_ebook_vendors %}
+<li>
+<a class="body-link" href="{{ vendor.url }}"> {{ vendor.name}} </a> <br />
+</li>
+{% endfor %}
+</ul>
+</li>
+{% endif %}
+
+{% if book.get_paperback_vendors %}
+<li class="dropdown">
+<a href="" class="dropdown-toggle" data-toggle="dropdown"> buy as paperback from... </a>
+<ul id="menu2" class="dropdown-menu">
+{% for vendor in book.get_paperback_vendors %}
+<li>
+<a class="body-link" href="{{ vendor.url }}"> {{ vendor.name}} </a> <br />
+</li>
+{% endfor %}
+</ul>
+</li>
+{% endif %}
+{% if book.excerpt %}
+<li class="dropdown"><a class="dropdown-toggle" href="{{ book.excerpt }}">read an excerpt...</a></li>
+{% endif %}
+</ul>
+</div>
+<!-- end cell -->
+</div>
+</div>
+<!-- end book -->
+
+
+
+
+
+{% endfor %}
+</div>
+<!-- end row -->
+{% endblock %}

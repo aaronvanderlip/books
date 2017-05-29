@@ -1,0 +1,178 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<!--[if lt IE 9]> <html class="lt-ie9" lang="en"> <![endif]-->
+<!--[if !IE] -->
+<html lang='en'>
+    <!-- <![endif] -->
+    {% include "books/inc/header.html" %}
+    <div id='main' role='main'>
+        <div id='main-content-header'>
+            <div class='container'>
+                <div class='row'>
+                    <div class='col-sm-12'>
+                        <h1 class='title' style="
+                        font-family: Rock Salt; color: #FFE669 !important;">
+                            {{ object.title  }}
+                        </h1>
+                        <p class="series-subhead">
+                        {% for series_entry in  object.series.all %}
+                        {{ series_entry.series.name}}
+                        {% if series_entry.number == 0 %}
+                        prequel
+                        {% else %}
+                        #{{series_entry.number }}
+                        {% endif %}
+                        {% endfor %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id='main-content'>
+            <div class='container'>
+                <div class='row'>
+                    <div class='col-sm-8 col-md-9'>
+                        <div class='row'>
+                            <div class='col-sm-12'>
+                                <h2 class='detail-header'><img src="{{ object.cover_image.url }}"  class="img-responsive" style="max-width:70%; float: right; padding-left: 24px; padding-bottom: 8px;">Blurb</h2>
+                                <p>
+                                {{ object.text|safe|linebreaksbr }}
+                                </p>
+
+                                {% if object.reviews.all %}
+                                <h2 class='detail-header' style="margin-top:20px !important" >Praise</h2>
+
+                                {% for review in object.reviews.all %}
+                                <p>
+                                {{ review.text|safe }}
+                                <br />
+                                &mdash;{{ review.source|safe }}
+                                </p>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class='col-sm-4 col-md-3'>
+                        <div class='sidebar'>
+                            <div class='box'>
+                                <h4 style="font-size:90%" > {{ object.pub_date  }}
+                                    <br />
+                                    {{ object.publisher }}
+                                    <br />
+                                    ISBN {{ object.isbn }}
+                                </h4>
+                                    {% with object.get_paperback_vendors as vendors %}
+                                    {% if vendors %}
+                                    <h3 class='title'>Buy Paperback</h3>
+                                    <ul class='list-unstyled list-padded'>
+                                        {% for vendor in vendors %}
+                                        <li>
+                                            <a href="{{ vendor.url }}">{{ vendor.name }}</a>
+                                        </li>
+                                        {% endfor %}
+                                    </ul>
+                                    {% endif %}
+                                    {% endwith %}
+                                    {% with object.get_ebook_vendors as vendors %}
+                                    {% if vendors %}
+                                    <h3 class='title'>Buy Ebook</h3>
+                                    <ul class='list-unstyled list-padded'>
+                                        {% for vendor in vendors %}
+                                        <li>
+                                            <a href="{{ vendor.url }}">{{ vendor.name }}</a>
+                                        </li>
+                                        {% endfor %}
+                                    </ul>
+                                    {% endif %}
+                                    {% endwith %}
+                                    {% with object.get_audio_vendors as vendors %}
+                                    {% if vendors %}
+                                    <h3 class='title'>Buy Audiobook</h3>
+                                    <ul class='list-unstyled list-padded'>
+                                        {% for vendor in vendors %}
+                                        <li>
+                                            <a href="{{ vendor.url }}">{{ vendor.name }}</a>
+                                        </li>
+                                        {% endfor %}
+                                    </ul>
+                                    {% endif %}
+                                    {% endwith %}
+                            </div>
+                            <div class='box'>
+                                <a class="btn btn-contrast btn-bordered btn-block" style="font-size:15px; margin-bottom:10px;" href="{{ book.excerpt }}">Read an Excerpt</a>
+                                <a class="btn btn-contrast btn-bordered btn-block" style="font-size:15px;" href="http://www.goodreads.com/book/isbn/{{ book.isbn }}">Add on Goodreads</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class='row'>
+                    <div class='col-sm-12'>
+                        <div class='page-header page-header-with-icon'>
+                            <i class='fa fa-book'></i>
+                            <h2>
+                                {% if object.series.all %}
+                                Books in this series
+                                {% else %}
+                                You might also like… 
+                                {% endif %}
+                            </h2>
+                        </div>
+
+                        <div class='row portfolio-boxes'>
+                            <div class='carousel carousel-default slide carousel-auto' id='carousel-related-work'>
+                                <div class='carousel-inner'>
+                                    {% if object.get_other_books %}
+                                    {% for group in object.get_other_books %}
+                                    <div class='item {% if forloop.first %}active{% endif %}'>
+                                        {% for item in group %}
+                                        <div class='col-sm-4 portfolio-box'>
+                                            <a href="{% url 'book-detail' item.slug %}">
+                                                <div class='image-link'>
+                                                    <i class='fa fa-search'></i>
+                                                    {% if item.thumbnail_image %}
+                                                    <img src="{{ item.thumbnail_image.url  }}" 
+                                                         alt="{{ item.title }}" class="img-responsive img-rounded center-block">
+                                                    {% endif %}
+                                                </div>
+                                                <h3 class='title'>{{ item.title }}</h3>
+                                                {% if item.get_series %}
+                                                <p class='category'>
+                                                {% for series_entry in  item.series.all %}
+                                                {{ series_entry.series.name}}
+                                                {% if series_entry.number == 0 %}
+                                                prequel
+                                                {% else %}
+                                                #{{series_entry.number }}
+                                                {% endif %}
+                                                {% endfor %}
+                                                </p>
+                                                {% endif %}
+                                            </a>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                    {% endfor %}
+                                    {% endif %}
+                                </div>
+                                <ol class='carousel-indicators'>
+                                    {% for slide_index in object.get_other_books_count %}
+                                    <li {% if forloop.first %}class='active'{% endif %} data-slide-to='{{ slide_index }}' data-target='#carousel-related-work'></li>
+                                    {% endfor %}
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class='fade' id='scroll-to-top'>
+        <i class='fa fa-chevron-up'></i>
+    </div>
+    </div>
+    {% include "books/inc/footer.html" %}
+    </div>
+    {% include "books/inc/js.html" %}
+    </body>
+</html>

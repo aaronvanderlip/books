@@ -1,0 +1,115 @@
+{% load staticfiles %}
+{% load flatblocks %}
+<!DOCTYPE html>
+<!--[if lt IE 9]> <html class="lt-ie9" lang="en"> <![endif]-->
+<!--[if !IE] -->
+<html lang='en'>
+    <!-- <![endif] -->
+    {% include "books/inc/header.html" %}
+
+        <div id='main-content-header'>
+            <div class='container'>
+                <div class='row'>
+                    <div class='col-sm-12'>
+                        <h1 class='title' style="font-family: Rock Salt; color: #FF8D56 !important;">
+                            About
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id='main-content'>
+            <div class='container'>
+                <div class='row'>
+                    <div class='col-sm-12'>
+                        <p class='lead text-center no-mg-b'>Author bio, contact info, and frequently asked questions.</p>
+                    </div>
+                </div>
+                <div class='row'>
+                    <div class='col-sm-12'>
+                        <div class='page-header page-header-with-icon'>
+                            <i class='fa fa-user'></i>
+                            <h2>About Cara</h2>
+                        </div>
+                        <div class='text-boxes'>
+                            <div class='row text-box'>
+                                <div class='col-sm-6'>
+                                    <p>Since she began writing in 2008, Cara McKenna has published nearly forty romances and erotic novels with a variety of publishers, sometimes under the pen names Meg Maguire and C.M. McKenna. Her stories have been acclaimed for their smart, modern voice and defiance of convention. She was a 2015 RITA Award finalist, a 2014 <em>RT</em> Reviewers’ Choice Award winner, a 2012 and 2011 <em>RT</em> Reviewers’ Choice Award nominee, and a 2010 Golden Heart Award finalist. She lives with her husband and baby son in the Pacific Northwest, though she’ll always be a Boston girl at heart.</p>
+                                    <p>Cara is represented by Laura Bradford, of the Bradford Literary Agency.</p>
+                                </div>
+                                <div class='col-sm-4'><img class="img-responsive center-block img-rounded" alt="Cara McKenna headshot" width="262" height="262" src="/media/headshot-262_IjNPo8p.jpg"/></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class='row'>
+                    <div class='col-sm-12'>
+                        <div class='page-header page-header-with-icon'>
+                            <i class='fa fa-plug'></i>
+                            <h2>
+                                Connect
+                            </h2>
+                        </div>
+                        <div class='row text-center'>
+                            <div class='col-sm-4'>
+                                <div class='icon-wrap icon-circle contrast-bg icon-md'>
+                                    <i class='fa fa-envelope text-white'></i>
+                                </div>
+                                <h3>Email</h3>
+                                <ul class='list-unstyled'>
+                                    <li><a href="mailto:cara@caramckenna.com">cara@caramckenna.com</a></li>
+                                </ul>
+                            </div>
+                            <div class='col-sm-4'>
+                                <div class='icon-wrap icon-circle contrast-bg icon-md'>
+                                    <i class='fa fa-comments text-white'></i>
+                                </div>
+                                <h3>Social Media</h3>
+                                <ul class='list-unstyled'>
+                                    <li><a href="https://facebook.com/authorcaramckenna" target="new">Facebook</a></li>
+                                    <li><a href="https://twitter.com/caramckenna" target="new">Twitter</a></li>
+                                    <li><a href="https://www.instagram.com/authorcaramckenna/" target="new">Instagram</a></li>
+                                </ul>
+                            </div>
+                            <div class='col-sm-4'>
+                                <div class='icon-wrap icon-circle contrast-bg icon-md'>
+                                    <i class='fa fa-key text-white'></i>
+                                </div>
+                                <h3>Agent</h3>
+                                <ul class='list-unstyled'>
+                                    <li><a href="http://www.bradfordlit.com/" target="new">Bradford Literary Agency</a></li>
+                                    <li>5694 Mission Center Rd. #347</li>
+                                    <li>San Diego, CA 92108</li>
+                                    <li>(619) 521-1201</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class='row'>
+                    <div class='col-sm-12'>
+                        <div class='page-header page-header-with-icon'>
+                            <i class='fa fa-question-circle'></i>
+                            <h2>FAQ</h2>
+                        </div>
+                        <div class='text-boxes'>
+                            <div class='row text-box'>
+
+                                <div class='col-sm-8 col-sm-offset-2'>
+                                        {% flatblock "about.faq" using="books/flatblock.html" %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class='fade' id='scroll-to-top'>
+                    <i class='fa fa-chevron-up'></i>
+                </div>
+            </div>
+        </div>
+            {% include "books/inc/footer.html" %}
+        </div>
+        {% include "books/inc/js.html" %}
+        </body>
+</html>
